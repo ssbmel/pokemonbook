@@ -24,7 +24,7 @@ function PokemonList() {
       (<div
       key={data.id}
       className="inline-grid border w-36 p-5 m-2 rounded-md">
-        <Link href={'/pokemonDetails'}>
+        <Link href={`/pokemonDetails/${data.id}`}>
         <p>Num.{data.id}</p>
         <Image src={data.sprites.front_default} alt="img" width={120} height={120} className="mx-auto"/>
         <p>{data.korean_name}</p>
