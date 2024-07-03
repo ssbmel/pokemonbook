@@ -24,7 +24,7 @@ function PokemonList() {
   }, []);
 
   return (
-    <div className="w-[50%] mx-auto">
+    <div className="w-[60%] mx-auto">
       {pokemonData?.map((data, index) => {
         return (
           <div
