@@ -3,9 +3,14 @@
 @tailwind utilities;
 
 :root {
-background-color: black;
-color: white;
+background-color: rgba(0, 0, 0, 0.1);
+color: black;
 text-align: center;
 }
 
-
+.custom-shadow {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.custom-shadow:hover {
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
