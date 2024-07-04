@@ -1,35 +1,43 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 function PokemonList() {
-  const [pokemonData, setPokemonData] = useState<Pokemon[]>([]);
+  const { data, isLoading, isError,} = useQuery({
+    queryKey: ['pokemon'],
+    queryFn: async () => {
+      const { data } = await axios.get<Pokemon[]>("/api/pokemons");
+     return data;
+    },
+  });
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await fetch("/api/pokemons");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setPokemonData(data);
-      } catch (error) {
-        console.error("There was an error!", error);
-      }
-    };
-    getData();
-  }, []);
+  if(isLoading) {
+    return (
+    <div className="sk-chase">
+    <div className="sk-chase-dot"></div>
+    <div className="sk-chase-dot"></div>
+    <div className="sk-chase-dot"></div>
+    <div className="sk-chase-dot"></div>
+    <div className="sk-chase-dot"></div>
+    <div className="sk-chase-dot"></div>
+    </div>
+    )
+  }
 
+  if(isError) {
+    return <div>Error</div>;
+  }
   return (
     <div className="w-[60%] mx-auto">
-      {pokemonData?.map((data, index) => {
+      {data?.map((data, index) => {
         return (
           <div
             key={index}
-            className="inline-grid border w-36 p-5 m-2 rounded-md custom-shadow"
+            className="inline-grid border w-36 p-5 m-2 rounded-md custom-shadow bg-white"
           >
             <Link href={`/pokemonDetails/${data.id}`}>
               <p>Num.{data.id}</p>
@@ -46,6 +54,7 @@ function PokemonList() {
         );
       })}
     </div>
+    
   );
 }
 

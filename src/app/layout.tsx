@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
 import Link from "next/link";
+import QueryProvider from "./provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,21 +22,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body >
-        <div>
-          <Link href={"/"}>
-            <Image
-              src={"/logo.png"}
-              alt="logo"
-              width={0}
-              height={0}
-              sizes="100vw"
-              className="my-20 mx-auto w-[400px] h-[auto]"
-              priority
-            />
-          </Link>
-        </div>
-        {children}
+      <body>
+        <QueryProvider>
+          <div>
+            <Link href={"/"}>
+              <Image
+                src={"/logo.png"}
+                alt="logo"
+                width={0}
+                height={0}
+                sizes="100vw"
+                className="my-20 mx-auto w-[400px] h-[auto]"
+                priority
+              />
+            </Link>
+          </div>
+          {children}
+        </QueryProvider>
       </body>
     </html>
   );
