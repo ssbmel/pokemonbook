@@ -31,6 +31,7 @@ function PokemonList() {
   if(isError) {
     return <div>Error</div>;
   }
+
   return (
     <div className="w-[60%] mx-auto">
       {data?.map((data, index) => {

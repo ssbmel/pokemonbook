@@ -1,3 +1,4 @@
+import PokemonType from "@/app/components/TypeColor";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,12 +10,12 @@ async function DetailPage({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <div className="rounded-lg p-5 w-[40%] mx-auto bg-white text-black shadow-2xl">
+      <div className="rounded-lg p-5 w-[40%] min-w-[500px] mx-auto bg-white text-black shadow-2xl">
         <span className="m-3">Num.{data.id}</span>
         <span className="text-2xl">{data.korean_name}</span>
         <div className="flex mx-auto w-[400px]">
           <Image
-            src={data.sprites.front_default}
+            src={data.sprites?.front_default}
             alt="img"
             width={300}
             height={300}
@@ -26,23 +27,23 @@ async function DetailPage({ params }: { params: { id: string } }) {
           <div>키 : {data.height / 10}m</div>
           <div>무게 : {data.weight / 10}kg</div>
         </div>
-        <div>
+        <div className="inline-flex">
           타입 :{" "}
-          {data.types.map((t) => (
+          {data.types?.map((t) => (
             <div
-              key={data.id}
-              className="border border-red-500 w-auto inline-grid m-1 px-1"
+              key={t.type.korean_name}
+              className="min-w-10 inline-grid m-1 px-1 text-white"
             >
-              {t.type.korean_name}
+              <PokemonType typeName={t.type.korean_name} />
             </div>
           ))}
         </div>
         <div>
           특성 :{" "}
-          {data.abilities.map((a) => (
+          {data.abilities?.map((a) => (
             <div
               key={data.id}
-              className="border border-amber-500 w-auto inline-grid m-1 px-1"
+              className="bg-gray-500 text-white border rounded-sm w-auto inline-grid m-1 px-1"
             >
               {a.ability.korean_name}
             </div>
@@ -50,7 +51,7 @@ async function DetailPage({ params }: { params: { id: string } }) {
         </div>
         <div>
           기술 :{" "}
-          {data.moves.map((m) => (
+          {data.moves?.map((m) => (
             <div key={data.id} className="w-15 inline-grid m-1">
               {m.move.korean_name}
             </div>
