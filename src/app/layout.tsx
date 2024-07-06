@@ -4,6 +4,7 @@ import "./globals.css";
 import Image from "next/image";
 import Link from "next/link";
 import QueryProvider from "./provider";
+import Search from "./components/Search";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,6 +37,7 @@ export default function RootLayout({
                 priority
               />
             </Link>
+            <Search/>
           </div>
           {children}
         </QueryProvider>
