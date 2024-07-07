@@ -52,7 +52,7 @@ export default function Search() {
 
 const FoundPokemonList = ({foundPokemon}) => {
   return (
-    <div className="w-[60%] mx-auto">
+    <div className="w-[60%] mx-auto mb-10">
       {foundPokemon?.map((data, index) => {
         return (
           <div

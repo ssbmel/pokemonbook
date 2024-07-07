@@ -37,7 +37,6 @@ export default function RootLayout({
                 priority
               />
             </Link>
-            <Search/>
           </div>
           {children}
         </QueryProvider>
