@@ -24,9 +24,11 @@ export default function Search() {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if(searchInput === "") {
+      alert("이름을 검색하세요.");
+    }
     const pokemonName = data?.filter((d)=>d.korean_name === searchInput);
     setFoundPokemon(pokemonName);
-
   };
 
   return (
