@@ -1,22 +1,32 @@
 "use client";
 
-import React, { MouseEventHandler, useRef, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useState } from "react";
 
 export default function Search() {
-  //api 데이터를 가져와서
-  //input에 있는 값도 state 설정하고
-  //두개 비교해서 같으면 filter
-
   const [searchInput, setSearchInput] = useState<string>();
   const [foundPokemon, setFoundPokemon] = useState();
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setFoundPokemon(searchInput);
-  };
+  const { data } = useQuery({
+    queryKey: ['pokemon'],
+    queryFn: async () => {
+      const { data } = await axios.get<Pokemon[]>("/api/pokemons");
+     return data;
+    },
+  });
 
   const onChange = (e: React.FormEvent<HTMLInputElement>) => {
     setSearchInput(e.currentTarget.value);
+  };
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const pokemonName = data?.filter((d)=>d.korean_name === searchInput);
+    setFoundPokemon(pokemonName);
+
   };
 
   return (
@@ -34,16 +44,35 @@ export default function Search() {
         </button>
       </form>
       <FoundPokemonList
-        searchInput={searchInput}
         foundPokemon={foundPokemon}
-        setFoundPokemon={setFoundPokemon}
       />
     </>
   );
 }
 
-const FoundPokemonList = ({searchInput, foundPokemon, setFoundPokemon}:string) => {
+const FoundPokemonList = ({foundPokemon}) => {
   return (
-    <div>{searchInput}</div>
+    <div className="w-[60%] mx-auto">
+      {foundPokemon?.map((data, index) => {
+        return (
+          <div
+            key={index}
+            className="inline-grid border w-36 p-5 m-2 rounded-md custom-shadow bg-white"
+          >
+            <Link href={`/pokemonDetails/${data.id}`}>
+              <p>Num.{data.id}</p>
+              <Image
+                src={data.sprites.front_default}
+                alt="img"
+                width={120}
+                height={120}
+                className="mx-auto"
+              />
+              <p>{data.korean_name}</p>
+            </Link>
+          </div>
+        );
+      })}
+    </div>
   )
 };
