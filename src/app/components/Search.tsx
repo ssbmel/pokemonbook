@@ -8,7 +8,7 @@ import React, { useState } from "react";
 
 export default function Search() {
   const [searchInput, setSearchInput] = useState<string>();
-  const [foundPokemon, setFoundPokemon] = useState();
+  const [foundPokemon, setFoundPokemon] = useState<Pokemon[]>();
 
   const { data } = useQuery({
     queryKey: ['pokemon'],
@@ -52,7 +52,7 @@ export default function Search() {
   );
 }
 
-const FoundPokemonList = ({foundPokemon}) => {
+const FoundPokemonList = ({foundPokemon}:{foundPokemon?:Pokemon[]}) => {
   return (
     <div className="w-[60%] mx-auto mb-10">
       {foundPokemon?.map((data, index) => {
