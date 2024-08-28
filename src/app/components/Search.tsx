@@ -37,11 +37,11 @@ export default function Search() {
         <input
           onChange={onChange}
           value={searchInput}
-          className="rounded-lg w-[200px] pl-1"
+          className="rounded-sm w-[200px] px-2 py-1"
           type="text"
-          placeholder="포켓몬 이름을 검색하세요."
+          placeholder="포켓몬 이름을 검색하라능"
         />
-        <button className="bg-blue-500 px-2 m-3 text-white rounded-md">
+        <button className="bg-blue-500 px-2 py-1 m-3 text-white rounded-sm">
           검색
         </button>
       </form>

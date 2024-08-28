@@ -44,5 +44,5 @@ const typeClass = (typeName: string): string => {
 };
 
 export default function PokemonType({ typeName }: { typeName: string }) {
-  return <div className={typeClass(typeName)}>{typeName}</div>;
+  return <div className={`${typeClass(typeName)} px-1 rounded-sm`}>{typeName}</div>;
 }

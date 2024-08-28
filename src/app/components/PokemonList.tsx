@@ -5,6 +5,8 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import Search from "./Search";
+import Loading from "../Loading";
 
 function PokemonList() {
   const { data, isLoading, isError,} = useQuery({
@@ -16,16 +18,7 @@ function PokemonList() {
   });
 
   if(isLoading) {
-    return (
-    <div className="sk-chase">
-    <div className="sk-chase-dot"></div>
-    <div className="sk-chase-dot"></div>
-    <div className="sk-chase-dot"></div>
-    <div className="sk-chase-dot"></div>
-    <div className="sk-chase-dot"></div>
-    <div className="sk-chase-dot"></div>
-    </div>
-    )
+    return <Loading />
   }
 
   if(isError) {

@@ -10,16 +10,16 @@ async function DetailPage({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <div className="rounded-lg p-5 w-[40%] min-w-[500px] mx-auto bg-white text-black shadow-2xl">
+      <div className="rounded-lg p-5 min-w-[400px] w-[600px] mx-auto bg-white text-black shadow-2xl mt-[300px]">
         <span className="m-3">Num.{data.id}</span>
         <span className="text-2xl">{data.korean_name}</span>
-        <div className="flex mx-auto w-[400px]">
+        <div className="flex mx-auto w-[200px] h-[200px] relative">
           <Image
             src={data.sprites?.front_default}
             alt="img"
-            width={300}
-            height={300}
-            className="mx-auto"
+            fill
+            sizes="200px"
+            className="mx-auto object-cover"
             priority
           />
         </div>
@@ -43,7 +43,7 @@ async function DetailPage({ params }: { params: { id: string } }) {
           {data.abilities?.map((a) => (
             <div
               key={data.id}
-              className="bg-gray-500 text-white border rounded-sm w-auto inline-grid m-1 px-1"
+              className="text-black border border-black rounded-sm w-auto inline-grid m-1 px-1"
             >
               {a.ability.korean_name}
             </div>
@@ -51,14 +51,14 @@ async function DetailPage({ params }: { params: { id: string } }) {
         </div>
         <div>
           기술 :{" "}
-          {data.moves?.map((m) => (
+          {data.moves?.slice(0, 5).map((m) => (
             <div key={data.id} className="w-15 inline-grid m-1">
               {m.move.korean_name}
             </div>
           ))}
         </div>
         <br />
-        <button className="p-2 text-white bg-[#006038] rounded-md">
+        <button className="px-3 py-1 text-white bg-slate-400 rounded-sm">
           <Link href={"/"}>뒤로가기</Link>
         </button>
       </div>
