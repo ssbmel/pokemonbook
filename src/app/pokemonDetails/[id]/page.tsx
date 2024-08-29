@@ -1,4 +1,5 @@
 import PokemonType from "@/app/components/TypeColor";
+import { Pokemon } from "@/app/types/type";
 import Image from "next/image";
 import Link from "next/link";
 
